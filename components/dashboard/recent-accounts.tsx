@@ -111,7 +111,7 @@ export function RecentAccounts() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[80px]">Serial</TableHead>
+                                <TableHead className="w-20">Serial</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Phone Number</TableHead>
                                 <TableHead>Account Type</TableHead>
@@ -155,7 +155,7 @@ export function RecentAccounts() {
 
                 {/* View User Dialog */}
                 <Dialog open={isViewOpen} onOpenChange={setIsViewOpen}>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-106.25">
                         <DialogHeader className="hidden">
                             <DialogTitle>User Details</DialogTitle>
                             <DialogDescription>View user details</DialogDescription>
@@ -200,26 +200,28 @@ export function RecentAccounts() {
 
                 {/* Block User Alert */}
                 <AlertDialog open={isBlockOpen} onOpenChange={setIsBlockOpen}>
-                    <AlertDialogContent className="sm:max-w-[400px] pt-12">
-                        <div className="absolute top-4 right-4">
-                            <AlertDialogCancel className="border-none p-1 h-auto w-auto hover:bg-red-100 bg-red-50 text-red-500 rounded-full transition-colors flex items-center justify-center ring-offset-background">
-                                <HugeiconsIcon icon={Cancel01Icon} size={18} />
+                    <AlertDialogContent className="sm:max-w-sm p-6">
+                        <div className="absolute top-3 right-3">
+                            <AlertDialogCancel className="border-none p-1.5 h-auto w-auto hover:bg-red-100 bg-transparent text-red-400 rounded-full transition-colors">
+                                <HugeiconsIcon icon={Cancel01Icon} size={16} />
                             </AlertDialogCancel>
                         </div>
-                        <AlertDialogHeader className="items-center text-center space-y-4">
-                            <AlertDialogTitle className="text-xl font-bold">Block User</AlertDialogTitle>
-                            <AlertDialogDescription className="text-center text-muted-foreground">
-                                Are you sure you want to block this user?
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter className="sm:justify-center w-full mt-4">
-                            <AlertDialogAction
-                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-base rounded-lg shadow-sm transition-all"
-                                onClick={() => setIsBlockOpen(false)}
-                            >
-                                CONFIRM →
-                            </AlertDialogAction>
-                        </AlertDialogFooter>
+                        <div className="flex flex-col items-center gap-4 pt-2">
+                            <AlertDialogHeader className="space-y-3 text-center">
+                                <AlertDialogTitle className="text-2xl font-bold">Block User</AlertDialogTitle>
+                                <AlertDialogDescription className="text-muted-foreground text-sm">
+                                    Are you sure you want to block this user?
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="w-full mt-2">
+                                <AlertDialogAction
+                                    className="w-full bg-primary text-white font-bold h-12 text-sm rounded-lg shadow-none"
+                                    onClick={() => setIsBlockOpen(false)}
+                                >
+                                    CONFIRM →
+                                </AlertDialogAction>
+                            </AlertDialogFooter>
+                        </div>
                     </AlertDialogContent>
                 </AlertDialog>
             </CardContent>

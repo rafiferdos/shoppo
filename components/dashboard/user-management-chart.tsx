@@ -82,7 +82,7 @@ export function UserManagementChart() {
                         />
                         <Bar
                             dataKey="users"
-                            fill="#16a34a"
+                            fill="#5ea500"
                             radius={[4, 4, 0, 0]}
                             barSize={40}
                         />
