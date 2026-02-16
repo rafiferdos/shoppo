@@ -52,7 +52,7 @@ export function LoginForm({
                     </Link>
                 </div>
 
-                <Button type="submit" size={'lg'} className="w-full">
+                <Button type="submit" size={'lg'} className="w-full h-12 rounded-full">
                     Login
                 </Button>
             </form>
