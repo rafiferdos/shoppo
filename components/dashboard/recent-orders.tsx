@@ -52,12 +52,12 @@ const recentOrders = [
 
 export function RecentOrders() {
     return (
-        <Card className="col-span-1 md:col-span-2 shadow-sm border-none">
+        <Card className="col-span-1 md:col-span-2 shadow-sm border-none h-full flex flex-col">
             <CardHeader>
                 <CardTitle>Recent Orders</CardTitle>
             </CardHeader>
-            <CardContent>
-                <div className="overflow-auto max-h-[350px]">
+            <CardContent className="flex-1 overflow-hidden">
+                <div className="overflow-auto h-[380px]">
                     <Table>
                         <TableHeader>
                             <TableRow>

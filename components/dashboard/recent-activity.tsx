@@ -48,12 +48,12 @@ const activities = [
 
 export function RecentActivity() {
     return (
-        <Card className="col-span-1 shadow-sm border-none">
+        <Card className="col-span-1 shadow-sm border-none h-full flex flex-col">
             <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
             </CardHeader>
-            <CardContent>
-                <div className="space-y-8">
+            <CardContent className="flex-1">
+                <div className="space-y-6 h-95 overflow-auto pr-2">
                     {activities.map((activity, index) => (
                         <div key={index} className="flex items-start">
                             <div className={`mr-4 flex h-9 w-9 items-center justify-center rounded-full ${activity.color}`}>
