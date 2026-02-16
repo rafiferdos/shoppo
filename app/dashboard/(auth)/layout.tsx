@@ -12,7 +12,7 @@ export default function AuthLayout({
           src="/assets/auth-side-bg.png"
           alt="Authentication Background"
           fill
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover p-2 rounded-xl bg-white"
           priority
         />
       </div>
