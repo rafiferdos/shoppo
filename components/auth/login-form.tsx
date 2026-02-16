@@ -24,7 +24,7 @@ export function LoginForm({
                 />
                 <div className="space-y-2">
                     <h1 className="text-2xl font-bold tracking-tight">Login To Your Account</h1>
-                    <p className="text-muted-foreground text-sm text-balance max-w-xs mx-auto">
+                    <p className="text-muted-foreground text-sm text-balance max-w-md mx-auto">
                         Please log in to manage your dashboard and access all your administrative tools
                     </p>
                 </div>
