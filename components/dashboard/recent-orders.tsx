@@ -57,11 +57,11 @@ export function RecentOrders() {
                 <CardTitle>Recent Orders</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 overflow-hidden">
-                <div className="overflow-auto h-[380px]">
+                <div className="overflow-auto h-95">
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[150px]">Customer</TableHead>
+                                <TableHead className="w-37.5">Customer</TableHead>
                                 <TableHead>Product</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead className="text-right">Amount</TableHead>

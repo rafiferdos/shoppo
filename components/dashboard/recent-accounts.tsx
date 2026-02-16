@@ -212,9 +212,9 @@ export function RecentAccounts() {
                                 Are you sure you want to block this user?
                             </AlertDialogDescription>
                         </AlertDialogHeader>
-                        <AlertDialogFooter className="sm:justify-center w-full mt-6">
+                        <AlertDialogFooter className="sm:justify-center w-full mt-4">
                             <AlertDialogAction
-                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-11"
+                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-base rounded-lg shadow-sm transition-all"
                                 onClick={() => setIsBlockOpen(false)}
                             >
                                 CONFIRM →

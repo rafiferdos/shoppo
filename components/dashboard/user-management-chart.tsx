@@ -53,7 +53,7 @@ export function UserManagementChart() {
             </CardHeader>
             <CardContent className="pl-2">
                 <ResponsiveContainer width="100%" height={320}>
-                    <BarChart data={data} barGap={-28}>
+                    <BarChart data={data} barGap={-40}>
                         <CartesianGrid
                             strokeDasharray="3 3"
                             vertical={false}
