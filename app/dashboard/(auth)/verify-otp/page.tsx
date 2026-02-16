@@ -54,7 +54,7 @@ export default function VerifyOtpPage() {
                 </Button>
                 <div className="text-center text-sm">
                     Didn&apos;t receive code?{" "}
-                    <Button variant="link" className="p-0 h-auto font-normal text-primary underline-offset-4">
+                    <Button variant="link" className="p-0 h-auto font-normal text-primary underline-offset-4 hover:text-primary/90">
                         Resend Code
                     </Button>
                 </div>

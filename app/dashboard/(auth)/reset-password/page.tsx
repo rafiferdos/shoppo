@@ -41,7 +41,7 @@ export default function ResetPasswordPage() {
                     <Label htmlFor="confirm-password">Confirm New Password</Label>
                     <Input id="confirm-password" type="password" placeholder="••••••••••••" required className="rounded-full px-4 h-12 bg-muted/30 border-muted-foreground/20" />
                 </div>
-                <Button type="submit" size="lg" className="w-full h-12">
+                <Button type="submit" size="lg" className="w-full h-12 rounded-full">
                     Submit
                 </Button>
             </form>
