@@ -23,7 +23,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -69,28 +68,28 @@ const sidebarItems = [
     }
 ]
 
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
-
 function AppSidebar() {
     const pathname = usePathname()
     const { state, isMobile } = useSidebar()
 
     return (
-        <Sidebar collapsible="icon" className="border-r pt-16 md:pt-0">
-            <SidebarHeader className={cn("flex items-center justify-center py-6 transition-all duration-300", state === "collapsed" ? "px-2" : "px-4")}>
+        <Sidebar collapsible="icon" className="border-r">
+            <SidebarHeader className={cn(
+                "flex items-center justify-center py-6 transition-all duration-300",
+                state === "collapsed" ? "px-2" : "px-4"
+            )}>
                 <Link href="/dashboard" className="flex items-center justify-center overflow-hidden w-full">
-                    <div className={cn("relative transition-all duration-300", state === "collapsed" ? "size-10" : "size-20")}>
+                    <div className={cn(
+                        "relative transition-all duration-300",
+                        state === "collapsed" ? "size-10" : "size-20"
+                    )}>
                         <Image src="/assets/logo.png" fill alt="Dubuy Logo" className="object-contain" />
                     </div>
                 </Link>
             </SidebarHeader>
+
             <SidebarContent className="px-3 py-4">
-                <SidebarMenu className="gap-2">
+                <SidebarMenu className="gap-1.5">
                     {sidebarItems.map((item) => {
                         const isActive = item.href === "/dashboard"
                             ? pathname === "/dashboard"
@@ -98,70 +97,65 @@ function AppSidebar() {
 
                         return (
                             <SidebarMenuItem key={item.href}>
-                                <Tooltip>
-                                    <TooltipTrigger render={
-                                        <SidebarMenuButton
-                                            isActive={isActive}
-                                            size="lg"
-                                            render={<Link href={item.href} />}
+                                <SidebarMenuButton
+                                    isActive={isActive}
+                                    size="lg"
+                                    render={<Link href={item.href} />}
+                                    className={cn(
+                                        "transition-all duration-200 flex items-center gap-4 px-3",
+                                        "group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center",
+                                        isActive
+                                            ? "bg-primary! text-primary-foreground! hover:bg-primary/90! hover:text-primary-foreground! font-semibold shadow-sm"
+                                            : "text-muted-foreground hover:text-foreground font-medium"
+                                    )}
+                                >
+                                    <div className="size-6 relative shrink-0 flex items-center justify-center">
+                                        <Image
+                                            src={item.icon}
+                                            fill
+                                            alt={item.title}
                                             className={cn(
-                                                "transition-all duration-200 flex items-center gap-4 px-3 group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center",
+                                                "object-contain transition-all",
                                                 isActive
-                                                    ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground font-semibold shadow-sm"
-                                                    : "text-muted-foreground hover:text-primary hover:bg-sidebar-accent/50 font-medium"
+                                                    ? "brightness-0 invert"
+                                                    : "grayscale opacity-70 group-hover/menu-button:grayscale-0 group-hover/menu-button:opacity-100"
                                             )}
-                                        >
-                                            <div className="size-6 relative shrink-0 flex items-center justify-center">
-                                                <Image
-                                                    src={item.icon}
-                                                    fill
-                                                    alt={item.title}
-                                                    className={cn(
-                                                        "object-contain transition-all",
-                                                        isActive ? "brightness-0 invert" : "grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100"
-                                                    )}
-                                                />
-                                            </div>
-                                            <span className="truncate text-sm group-data-[collapsible=icon]:hidden">{item.title}</span>
-                                        </SidebarMenuButton>
-                                    } />
-                                    <TooltipContent side="right" hidden={state !== "collapsed" || isMobile}>
+                                        />
+                                    </div>
+                                    <span className="truncate text-sm group-data-[collapsible=icon]:hidden">
                                         {item.title}
-                                    </TooltipContent>
-                                </Tooltip>
+                                    </span>
+                                </SidebarMenuButton>
                             </SidebarMenuItem>
                         )
                     })}
                 </SidebarMenu>
             </SidebarContent>
+
             <SidebarFooter className="p-4 mt-auto">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <Tooltip>
-                            <TooltipTrigger render={
-                                <SidebarMenuButton
-                                    className="text-muted-foreground hover:text-primary hover:bg-sidebar-accent/50 flex items-center gap-4 px-3 group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center"
-                                    size="lg"
-                                    render={<Link href="/dashboard/login" />}
-                                >
-                                    <div className="size-6 relative shrink-0 flex items-center justify-center">
-                                        <Image
-                                            src="/assets/dashboard-icons-svg/logout.svg"
-                                            fill
-                                            alt="Logout"
-                                            className="object-contain grayscale opacity-70"
-                                        />
-                                    </div>
-                                    <span className="truncate font-medium text-sm group-data-[collapsible=icon]:hidden">Logout</span>
-                                </SidebarMenuButton>
-                            } />
-                            <TooltipContent side="right" hidden={state !== "collapsed" || isMobile}>
+                        <SidebarMenuButton
+                            size="lg"
+                            render={<Link href="/dashboard/login" />}
+                            className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-3 group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center"
+                        >
+                            <div className="size-6 relative shrink-0 flex items-center justify-center">
+                                <Image
+                                    src="/assets/dashboard-icons-svg/logout.svg"
+                                    fill
+                                    alt="Logout"
+                                    className="object-contain grayscale opacity-70 group-hover/menu-button:grayscale-0 group-hover/menu-button:opacity-100"
+                                />
+                            </div>
+                            <span className="truncate font-medium text-sm group-data-[collapsible=icon]:hidden">
                                 Logout
-                            </TooltipContent>
-                        </Tooltip>
+                            </span>
+                        </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>
+
             <SidebarRail />
         </Sidebar>
     )
@@ -175,37 +169,31 @@ export default function DashboardMainLayout({
     return (
         <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="bg-muted/10">
-                <header className="sticky top-0 z-10 flex h-20 items-center gap-4 bg-background px-6 shadow-sm/50">
-                    <SidebarTrigger className="-ml-2 h-10 w-10 text-muted-foreground hover:bg-muted hover:text-primary transition-colors" />
-                    <div className="flex flex-col ml-2">
-                        <h1 className="text-xl font-bold text-foreground">Welcome, Dino</h1>
-                        <p className="text-sm text-muted-foreground font-medium">Have a nice day!</p>
+            <SidebarInset>
+                <header className="sticky top-0 z-10 flex h-16 items-center gap-4 bg-background px-6 border-b border-border/40">
+                    <SidebarTrigger className="-ml-2 h-9 w-9 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors" />
+                    <div className="flex flex-col ml-1">
+                        <h1 className="text-base font-semibold text-foreground leading-tight">Welcome, Dino</h1>
+                        <p className="text-xs text-muted-foreground">Have a nice day!</p>
                     </div>
-                    <div className="ml-auto flex items-center gap-6">
-                        <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-full bg-muted/30 hover:bg-muted/80 transition-colors">
-                            <HugeiconsIcon icon={Notification01Icon} size={22} className="text-foreground/80 stroke-2" />
-                            <span className="absolute top-2.5 right-3 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-background animate-pulse" />
+                    <div className="ml-auto flex items-center gap-3">
+                        <Button variant="ghost" size="icon" className="relative h-9 w-9 rounded-full hover:bg-muted transition-colors">
+                            <HugeiconsIcon icon={Notification01Icon} size={20} className="text-muted-foreground" />
+                            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
                             <span className="sr-only">Notifications</span>
                         </Button>
 
                         <DropdownMenu>
-                            <DropdownMenuTrigger render={
-                                <Button variant="outline" className="h-12 gap-3 rounded-full border px-2 py-1 pl-5 hover:bg-muted/30 transition-all group">
-                                    <span className="font-bold text-sm tracking-tight group-hover:text-primary transition-colors">Dino</span>
-                                    <div className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-background shadow-sm">
-                                        <Image
-                                            src="/assets/logo.png" // Placeholder or user avatar
-                                            fill
-                                            alt="User Avatar"
-                                            className="object-cover bg-muted/50"
-                                        />
-                                    </div>
-                                </Button>
-                            } />
-                            <DropdownMenuContent align="end" className="w-56">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
+                            <DropdownMenuTrigger className="flex items-center gap-2 h-9 rounded-full px-1.5 pr-3 hover:bg-muted transition-all outline-none cursor-pointer">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/assets/logo.png"
+                                    alt="User Avatar"
+                                    className="h-7 w-7 rounded-full object-cover bg-muted shrink-0"
+                                />
+                                <span className="text-sm font-medium text-foreground">Dino</span>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
                                 <DropdownMenuItem className="cursor-pointer">Settings</DropdownMenuItem>
                                 <DropdownMenuItem className="cursor-pointer">Support</DropdownMenuItem>
@@ -218,7 +206,7 @@ export default function DashboardMainLayout({
                         </DropdownMenu>
                     </div>
                 </header>
-                <main className="flex-1 space-y-4 p-8 pt-6">
+                <main className="flex-1 p-6">
                     {children}
                 </main>
             </SidebarInset>
