@@ -13,7 +13,7 @@ export function QuotationsStats() {
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card className="shadow-sm border-none">
-                <CardContent className="p-6 flex justify-between items-center">
+                <CardContent className="px-4 flex justify-between items-center">
                     <div className="space-y-1">
                         <p className="text-sm font-medium text-muted-foreground">Total Quotations</p>
                         <p className="text-2xl font-bold">550</p>
@@ -24,7 +24,7 @@ export function QuotationsStats() {
                 </CardContent>
             </Card>
             <Card className="shadow-sm border-none">
-                <CardContent className="p-6 flex justify-between items-center">
+                <CardContent className="px-4 flex justify-between items-center">
                     <div className="space-y-1">
                         <p className="text-sm font-medium text-muted-foreground">Accepted</p>
                         <p className="text-2xl font-bold">450</p>
@@ -35,7 +35,7 @@ export function QuotationsStats() {
                 </CardContent>
             </Card>
             <Card className="shadow-sm border-none">
-                <CardContent className="p-6 flex justify-between items-center">
+                <CardContent className="px-4 flex justify-between items-center">
                     <div className="space-y-1">
                         <p className="text-sm font-medium text-muted-foreground">Pending</p>
                         <p className="text-2xl font-bold">40</p>
@@ -46,7 +46,7 @@ export function QuotationsStats() {
                 </CardContent>
             </Card>
             <Card className="shadow-sm border-none">
-                <CardContent className="p-6 flex justify-between items-center">
+                <CardContent className="px-4 flex justify-between items-center">
                     <div className="space-y-1">
                         <p className="text-sm font-medium text-muted-foreground">Rejected</p>
                         <p className="text-2xl font-bold">22</p>
