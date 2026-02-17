@@ -21,7 +21,7 @@ import {
     AlertCircleIcon,
     Sent02Icon
 } from "@hugeicons/core-free-icons"
-import type { Payment } from "./payment-types"
+import type { Payment } from "./types"
 
 interface PaymentDetailsDialogProps {
     open: boolean

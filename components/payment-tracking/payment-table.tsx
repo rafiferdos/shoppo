@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { CheckmarkCircle02Icon, Clock01Icon, AlertCircleIcon } from "@hugeicons/core-free-icons"
-import type { Payment } from "./payment-types"
+import type { Payment } from "./types"
 
 interface PaymentTableProps {
     data: Payment[]

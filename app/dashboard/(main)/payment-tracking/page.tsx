@@ -7,7 +7,7 @@ import { PaymentFilters } from "@/components/payment-tracking/payment-filters"
 import { PaymentTable } from "@/components/payment-tracking/payment-table"
 import { PaymentPagination } from "@/components/payment-tracking/payment-pagination"
 import { PaymentDetailsDialog } from "@/components/payment-tracking/payment-details-dialog"
-import { Payment } from "@/components/payment-tracking/payment-types"
+import { Payment } from "@/components/payment-tracking/types"
 
 // Mock Data Generator
 const generatePayments = (): Payment[] => {
