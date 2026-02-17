@@ -332,7 +332,7 @@ export default function AccountDetailsPage() {
                         </AlertDialogHeader>
                         <AlertDialogFooter className="w-full mt-2">
                             <AlertDialogAction
-                                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-sm rounded-lg shadow-none"
+                                className="w-full bg-primary font-bold h-12 rounded-lg shadow-none"
                                 onClick={() => setIsBlockOpen(false)}
                             >
                                 CONFIRM →
