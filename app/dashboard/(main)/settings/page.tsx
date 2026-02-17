@@ -1,4 +1,3 @@
-import { PageHeader } from "@/components/dashboard/page-header"
 import { SettingsMenuItem } from "@/components/settings/settings-menu-item"
 
 export default function SettingsPage() {
