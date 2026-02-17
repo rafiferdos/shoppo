@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import type { Value } from "platejs"
 import { TextAlignPlugin } from "@platejs/basic-styles/react"
@@ -20,8 +20,9 @@ import { ArrowLeft01Icon } from "@hugeicons/core-free-icons"
 import { ImageIcon } from "lucide-react"
 import { toast } from "sonner"
 import { BasicNodesKit } from "@/components/basic-nodes-kit"
+import { EditorContentSkeleton } from "@/components/settings/editor-content-skeleton"
 
-const initialValue: Value = [
+const initialContent: Value = [
     {
         type: "p",
         children: [
@@ -34,7 +35,9 @@ const initialValue: Value = [
 
 export default function PrivacyPolicyPage() {
     const [isEditing, setIsEditing] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [isSaving, setIsSaving] = useState(false)
+    const [value, setValue] = useState<Value>(initialContent)
 
     const editor = usePlateEditor({
         plugins: [
@@ -51,17 +54,24 @@ export default function PrivacyPolicyPage() {
                 },
             }),
         ],
-        value: initialValue,
+        value: value,
     })
 
+    // Simulate fetch
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
     const handleSave = async () => {
-        setIsLoading(true)
+        setIsSaving(true)
         const content = editor.children
         // TODO: Replace with actual API call
-        // await api.put('/settings/privacy-policy', { content })
         console.log("Saving content:", JSON.stringify(content))
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setIsLoading(false)
+        setIsSaving(false)
         setIsEditing(false)
         toast.success("Privacy Policy updated successfully")
     }
@@ -78,62 +88,68 @@ export default function PrivacyPolicyPage() {
                 </div>
             </div>
 
-            {/* Editor Area */}
-            <div className="bg-white rounded-2xl shadow-sm border border-border/40 overflow-hidden">
-                <Plate editor={editor}>
-                    {/* Toolbar - show only when editing */}
-                    {isEditing && (
-                        <FixedToolbar className="justify-end gap-1 rounded-t-xl border-b border-border/40 bg-white px-4">
-                            <ToolbarButton tooltip="Insert Image">
-                                <ImageIcon className="size-4" />
-                            </ToolbarButton>
+            {isLoading ? (
+                <EditorContentSkeleton />
+            ) : (
+                <>
+                    {/* Editor Area */}
+                    <div className="bg-white rounded-2xl shadow-sm border border-border/40 overflow-hidden">
+                        <Plate editor={editor}>
+                            {/* Toolbar - show only when editing */}
+                            {isEditing && (
+                                <FixedToolbar className="justify-end gap-1 rounded-t-xl border-b border-border/40 bg-white px-4">
+                                    <ToolbarButton tooltip="Insert Image">
+                                        <ImageIcon className="size-4" />
+                                    </ToolbarButton>
 
-                            <ToolbarSeparator />
+                                    <ToolbarSeparator />
 
-                            <FontSizeToolbarButton />
+                                    <FontSizeToolbarButton />
 
-                            <ToolbarSeparator />
+                                    <ToolbarSeparator />
 
-                            <MarkToolbarButton nodeType="bold" tooltip="Bold (⌘+B)">
-                                <span className="font-bold text-sm">B</span>
-                            </MarkToolbarButton>
-                            <MarkToolbarButton nodeType="italic" tooltip="Italic (⌘+I)">
-                                <span className="italic text-sm">I</span>
-                            </MarkToolbarButton>
-                            <MarkToolbarButton nodeType="underline" tooltip="Underline (⌘+U)">
-                                <span className="underline text-sm">U</span>
-                            </MarkToolbarButton>
+                                    <MarkToolbarButton nodeType="bold" tooltip="Bold (⌘+B)">
+                                        <span className="font-bold text-sm">B</span>
+                                    </MarkToolbarButton>
+                                    <MarkToolbarButton nodeType="italic" tooltip="Italic (⌘+I)">
+                                        <span className="italic text-sm">I</span>
+                                    </MarkToolbarButton>
+                                    <MarkToolbarButton nodeType="underline" tooltip="Underline (⌘+U)">
+                                        <span className="underline text-sm">U</span>
+                                    </MarkToolbarButton>
 
-                            <ToolbarSeparator />
+                                    <ToolbarSeparator />
 
-                            <AlignToolbarButton />
+                                    <AlignToolbarButton />
 
-                            <ToolbarSeparator />
+                                    <ToolbarSeparator />
 
-                            <IndentToolbarButton />
-                            <OutdentToolbarButton />
-                        </FixedToolbar>
-                    )}
+                                    <IndentToolbarButton />
+                                    <OutdentToolbarButton />
+                                </FixedToolbar>
+                            )}
 
-                    {/* Editor Content */}
-                    <EditorContainer className="min-h-125">
-                        <Editor
-                            placeholder="Write your Privacy Policy content here..."
-                            readOnly={!isEditing}
-                            className="px-8 py-6 text-base leading-relaxed"
-                        />
-                    </EditorContainer>
-                </Plate>
-            </div>
+                            {/* Editor Content */}
+                            <EditorContainer className="min-h-125">
+                                <Editor
+                                    placeholder="Write your Privacy Policy content here..."
+                                    readOnly={!isEditing}
+                                    className="px-8 py-6 text-base leading-relaxed"
+                                />
+                            </EditorContainer>
+                        </Plate>
+                    </div>
 
-            {/* Action Button */}
-            <Button
-                onClick={() => isEditing ? handleSave() : setIsEditing(true)}
-                disabled={isLoading}
-                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-sm"
-            >
-                {isLoading ? "Saving..." : isEditing ? "Save" : "Edit"}
-            </Button>
+                    {/* Action Button */}
+                    <Button
+                        onClick={() => isEditing ? handleSave() : setIsEditing(true)}
+                        disabled={isSaving}
+                        className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-sm"
+                    >
+                        {isSaving ? "Saving..." : isEditing ? "Save" : "Edit"}
+                    </Button>
+                </>
+            )}
         </div>
     )
 }

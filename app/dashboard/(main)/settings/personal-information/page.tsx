@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,23 +8,54 @@ import { Label } from "@/components/ui/label"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowLeft01Icon, Edit02Icon, CheckmarkCircle02Icon } from "@hugeicons/core-free-icons"
 import { toast } from "sonner"
+import { PersonalInfoSkeleton } from "@/components/settings/personal-info-skeleton"
 
 export default function PersonalInformationPage() {
     const [isEditing, setIsEditing] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [isSaving, setIsSaving] = useState(false)
     const [formData, setFormData] = useState({
-        name: "Ali Ahmed",
-        email: "aliahmed@gmail.com",
-        phone: "+218 92 123 4567"
+        name: "",
+        email: "",
+        phone: ""
     })
 
+    // Simulate fetching initial data
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setFormData({
+                name: "Ali Ahmed",
+                email: "aliahmed@gmail.com",
+                phone: "+218 92 123 4567"
+            })
+            setIsLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
     const handleSave = async () => {
-        setIsLoading(true)
+        setIsSaving(true)
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000))
-        setIsLoading(false)
+        setIsSaving(false)
         setIsEditing(false)
         toast.success("Profile updated successfully")
+    }
+
+    if (isLoading) {
+        return (
+            <div className="space-y-8 max-w-5xl mx-auto">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <Link href="/dashboard/settings" className="hover:bg-muted p-2 rounded-full transition-colors group">
+                            <HugeiconsIcon icon={ArrowLeft01Icon} size={24} className="text-muted-foreground group-hover:text-foreground transition-colors" />
+                        </Link>
+                        <h1 className="text-2xl font-bold tracking-tight">Personal Information</h1>
+                    </div>
+                </div>
+                <PersonalInfoSkeleton />
+            </div>
+        )
     }
 
     return (
@@ -40,7 +71,7 @@ export default function PersonalInformationPage() {
                 <Button
                     onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                     className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-2 min-w-32 shadow-sm transition-all"
-                    disabled={isLoading}
+                    disabled={isSaving}
                 >
                     {isEditing ? (
                         <>
