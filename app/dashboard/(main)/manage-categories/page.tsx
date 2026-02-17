@@ -113,6 +113,7 @@ export default function ManageCategoriesPage() {
                 <Button
                     className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-2 shadow-sm"
                     onClick={handleAddCategory}
+                    size={'lg'}
                 >
                     <HugeiconsIcon icon={Add01Icon} size={20} />
                     Add Category

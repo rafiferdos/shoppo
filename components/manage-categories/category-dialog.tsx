@@ -140,8 +140,8 @@ export function CategoryDialog({ open, onOpenChange, initialData, onSubmit }: Ca
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-                    <Button onClick={handleSubmit} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
+                    <Button variant="outline" size={'lg'} onClick={() => onOpenChange(false)}>Cancel</Button>
+                    <Button size={'lg'} onClick={handleSubmit} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
                         {initialData ? "Update Category" : "Add Category"}
                     </Button>
                 </DialogFooter>
