@@ -28,7 +28,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Notification01Icon, Logout01Icon } from "@hugeicons/core-free-icons"
+import { Logout01Icon } from "@hugeicons/core-free-icons"
+import { NotificationsPopover } from "@/components/dashboard/notifications-popover"
 
 const sidebarItems = [
     {
@@ -177,11 +178,7 @@ export default function DashboardMainLayout({
                         <p className="text-xs text-muted-foreground">Have a nice day!</p>
                     </div>
                     <div className="ml-auto flex items-center gap-3">
-                        <Button variant="ghost" size="icon" className="relative h-9 w-9 rounded-full hover:bg-muted transition-colors">
-                            <HugeiconsIcon icon={Notification01Icon} size={20} className="text-muted-foreground" />
-                            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
-                            <span className="sr-only">Notifications</span>
-                        </Button>
+                        <NotificationsPopover />
 
                         <DropdownMenu>
                             <DropdownMenuTrigger className="flex items-center gap-2 h-9 rounded-full px-1.5 pr-3 hover:bg-muted transition-all outline-none cursor-pointer">
