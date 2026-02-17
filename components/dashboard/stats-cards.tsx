@@ -36,7 +36,7 @@ export function StatsCards() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stats.map((stat, index) => (
                 <Card key={index} className="overflow-hidden border-none shadow-sm">
-                    <CardContent className="p-6">
+                    <CardContent className="px-4">
                         <div className="flex items-center justify-between space-y-0 pb-2">
                             <span className="text-sm font-medium text-muted-foreground">
                                 {stat.title}
