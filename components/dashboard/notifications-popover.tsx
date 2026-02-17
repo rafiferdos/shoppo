@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -11,6 +11,7 @@ import {
     AlertCircleIcon
 } from "@hugeicons/core-free-icons"
 import { cn } from "@/lib/utils"
+import { NotificationsSkeleton } from "./notifications-skeleton"
 
 interface Notification {
     id: string
@@ -57,8 +58,18 @@ const initialNotifications: Notification[] = [
 ]
 
 export function NotificationsPopover() {
-    const [notifications, setNotifications] = useState<Notification[]>(initialNotifications)
+    const [notifications, setNotifications] = useState<Notification[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setNotifications(initialNotifications)
+            setIsLoading(false)
+        }, 800)
+        return () => clearTimeout(timer)
+    }, [])
 
     const unreadCount = notifications.filter(n => !n.read).length
 
@@ -87,7 +98,7 @@ export function NotificationsPopover() {
             <PopoverContent className="w-80 p-0 shadow-lg border-border/40" align="end" sideOffset={8}>
                 <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-muted/30">
                     <h4 className="font-semibold text-sm">Notifications</h4>
-                    {unreadCount > 0 && (
+                    {!isLoading && unreadCount > 0 && (
                         <Button
                             variant="ghost"
                             size="sm"
@@ -99,7 +110,9 @@ export function NotificationsPopover() {
                     )}
                 </div>
                 <div className="max-h-100 overflow-y-auto">
-                    {notifications.length === 0 ? (
+                    {isLoading ? (
+                        <NotificationsSkeleton />
+                    ) : notifications.length === 0 ? (
                         <div className="p-8 text-center text-muted-foreground text-sm">
                             No notifications
                         </div>

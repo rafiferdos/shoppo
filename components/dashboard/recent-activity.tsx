@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
@@ -7,6 +10,7 @@ import {
     TruckIcon,
     Alert01Icon
 } from "@hugeicons/core-free-icons"
+import { RecentActivitySkeleton } from "./recent-activity-skeleton"
 
 const activities = [
     {
@@ -47,6 +51,20 @@ const activities = [
 ]
 
 export function RecentActivity() {
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState<typeof activities>([])
+
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setData(activities)
+            setIsLoading(false)
+        }, 1200)
+        return () => clearTimeout(timer)
+    }, [])
+
+    if (isLoading) return <RecentActivitySkeleton />
+
     return (
         <Card className="col-span-1 shadow-sm border-none h-full flex flex-col">
             <CardHeader>
@@ -54,7 +72,7 @@ export function RecentActivity() {
             </CardHeader>
             <CardContent className="flex-1">
                 <div className="space-y-6 h-95 overflow-auto pr-2">
-                    {activities.map((activity, index) => (
+                    {data.map((activity, index) => (
                         <div key={index} className="flex items-start">
                             <div className={`mr-4 flex h-9 w-9 items-center justify-center rounded-full ${activity.color}`}>
                                 <HugeiconsIcon icon={activity.icon} size={16} />

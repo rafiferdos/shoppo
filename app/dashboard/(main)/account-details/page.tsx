@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { format } from "date-fns"
 import { AccountFilters } from "@/components/account-details/account-filters"
 import { AccountTable, User } from "@/components/account-details/account-table"
+import { AccountTableSkeleton } from "@/components/account-details/account-table-skeleton"
 import { AccountPagination } from "@/components/account-details/account-pagination"
 import { ViewUserDialog } from "@/components/account-details/view-user-dialog"
 import { BlockUserDialog } from "@/components/account-details/block-user-dialog"
@@ -28,9 +29,9 @@ const generateAccounts = (): User[] => {
     return data
 }
 
-const accountsData = generateAccounts()
-
 export default function AccountDetailsPage() {
+    const [accountsData, setAccountsData] = useState<User[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     const [searchTerm, setSearchTerm] = useState("")
     const [date, setDate] = useState<Date | undefined>(undefined)
     const [currentPage, setCurrentPage] = useState(1)
@@ -40,6 +41,15 @@ export default function AccountDetailsPage() {
     const [selectedUser, setSelectedUser] = useState<User | null>(null)
     const [isViewOpen, setIsViewOpen] = useState(false)
     const [isBlockOpen, setIsBlockOpen] = useState(false)
+
+    // Simulate API fetch
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setAccountsData(generateAccounts())
+            setIsLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
 
     // Filter Logic
     const filteredAccounts = accountsData.filter(account => {
@@ -85,17 +95,23 @@ export default function AccountDetailsPage() {
                 onDateChange={setDate}
             />
 
-            <AccountTable
-                data={paginatedAccounts}
-                onView={handleView}
-                onBlock={handleBlock}
-            />
+            {isLoading ? (
+                <AccountTableSkeleton />
+            ) : (
+                <AccountTable
+                    data={paginatedAccounts}
+                    onView={handleView}
+                    onBlock={handleBlock}
+                />
+            )}
 
-            <AccountPagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-            />
+            {!isLoading && (
+                <AccountPagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            )}
 
             <ViewUserDialog
                 open={isViewOpen}

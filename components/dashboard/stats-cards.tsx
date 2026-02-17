@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
     Money03Icon,
@@ -6,6 +9,7 @@ import {
     ArrowUp01Icon
 } from "@hugeicons/core-free-icons"
 import { Card, CardContent } from "@/components/ui/card"
+import { StatsCardsSkeleton } from "./stats-cards-skeleton"
 
 const stats = [
     {
@@ -32,9 +36,23 @@ const stats = [
 ]
 
 export function StatsCards() {
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState<typeof stats>([])
+
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setData(stats)
+            setIsLoading(false)
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
+    if (isLoading) return <StatsCardsSkeleton />
+
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {stats.map((stat, index) => (
+            {data.map((stat, index) => (
                 <Card key={index} className="overflow-hidden border-none shadow-sm">
                     <CardContent className="px-4">
                         <div className="flex items-center justify-between space-y-0 pb-2">

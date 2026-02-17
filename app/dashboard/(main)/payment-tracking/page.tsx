@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/dashboard/page-header"
 import { PaymentStats } from "@/components/payment-tracking/payment-stats"
+import { PaymentStatsSkeleton } from "@/components/payment-tracking/payment-stats-skeleton"
 import { PaymentFilters } from "@/components/payment-tracking/payment-filters"
 import { PaymentTable } from "@/components/payment-tracking/payment-table"
+import { PaymentTableSkeleton } from "@/components/payment-tracking/payment-table-skeleton"
 import { PaymentPagination } from "@/components/payment-tracking/payment-pagination"
 import { PaymentDetailsDialog } from "@/components/payment-tracking/payment-details-dialog"
 import { Payment } from "@/components/payment-tracking/types"
@@ -135,7 +137,7 @@ export default function PaymentTrackingPage() {
                 subtitle="Monitor upfront and final payments for all orders"
             />
 
-            <PaymentStats />
+            {isLoading ? <PaymentStatsSkeleton /> : <PaymentStats />}
 
             <div className="space-y-4">
                 <PaymentFilters
@@ -144,9 +146,7 @@ export default function PaymentTrackingPage() {
                 />
 
                 {isLoading ? (
-                    <div className="h-64 flex items-center justify-center text-muted-foreground">
-                        Loading payments...
-                    </div>
+                    <PaymentTableSkeleton />
                 ) : (
                     <>
                         <PaymentTable

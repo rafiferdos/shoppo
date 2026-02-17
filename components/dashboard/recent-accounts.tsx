@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
     Table,
     TableBody,
@@ -32,8 +32,9 @@ import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ViewIcon, UnavailableIcon, Cancel01Icon } from "@hugeicons/core-free-icons"
 import { cn } from "@/lib/utils"
+import { RecentAccountsSkeleton } from "./recent-accounts-skeleton"
 
-const accounts = [
+const accountsMock = [
     {
         serial: "#01",
         name: "Ali Ahmed",
@@ -87,19 +88,32 @@ const accounts = [
 ]
 
 export function RecentAccounts() {
-    const [selectedUser, setSelectedUser] = useState<typeof accounts[0] | null>(null)
+    const [accounts, setAccounts] = useState<typeof accountsMock>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [selectedUser, setSelectedUser] = useState<typeof accountsMock[0] | null>(null)
     const [isViewOpen, setIsViewOpen] = useState(false)
     const [isBlockOpen, setIsBlockOpen] = useState(false)
 
-    const handleView = (user: typeof accounts[0]) => {
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setAccounts(accountsMock)
+            setIsLoading(false)
+        }, 1500)
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleView = (user: typeof accountsMock[0]) => {
         setSelectedUser(user)
         setIsViewOpen(true)
     }
 
-    const handleBlock = (user: typeof accounts[0]) => {
+    const handleBlock = (user: typeof accountsMock[0]) => {
         setSelectedUser(user)
         setIsBlockOpen(true)
     }
+
+    if (isLoading) return <RecentAccountsSkeleton />
 
     return (
         <Card className="col-span-4 shadow-sm border-none">

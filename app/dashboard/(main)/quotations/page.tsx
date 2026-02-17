@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { PageHeader } from "@/components/dashboard/page-header"
 import { QuotationsStats } from "@/components/quotations/quotation-stats"
+import { QuotationsStatsSkeleton } from "@/components/quotations/quotation-stats-skeleton"
 import { QuotationsTable } from "@/components/quotations/quotation-table"
 import { QuotationsSkeleton } from "@/components/quotations/quotation-skeleton"
 import { QuotationDetailsDialog, type Quotation } from "@/components/quotations/quotation-details-dialog"
@@ -104,7 +105,7 @@ export default function QuotationsPage() {
                 subtitle="Review and manage product quotation requests"
             />
 
-            <QuotationsStats />
+            {isLoading ? <QuotationsStatsSkeleton /> : <QuotationsStats />}
 
             <div className="space-y-4">
                 <h2 className="text-xl font-semibold tracking-tight">Quotation Requests</h2>

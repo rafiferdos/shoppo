@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from "recharts"
 import {
@@ -11,8 +11,9 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
+import { UserManagementChartSkeleton } from "./user-management-chart-skeleton"
 
-const data = [
+const chartData = [
     { name: "Jan", users: 30, total: 50 },
     { name: "Feb", users: 15, total: 50 },
     { name: "Mar", users: 38, total: 50 },
@@ -29,6 +30,19 @@ const data = [
 
 export function UserManagementChart() {
     const [selectedYear, setSelectedYear] = useState("2025")
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState<typeof chartData>([])
+
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setData(chartData)
+            setIsLoading(false)
+        }, 1500)
+        return () => clearTimeout(timer)
+    }, [])
+
+    if (isLoading) return <UserManagementChartSkeleton />
 
     return (
         <Card className="col-span-4 shadow-sm border-none">

@@ -1,4 +1,6 @@
+"use client"
 
+import { useState, useEffect } from "react"
 import {
     Table,
     TableBody,
@@ -10,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { RecentOrdersSkeleton } from "./recent-orders-skeleton"
 
 const recentOrders = [
     {
@@ -51,6 +54,20 @@ const recentOrders = [
 ]
 
 export function RecentOrders() {
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState<typeof recentOrders>([])
+
+    useEffect(() => {
+        // Simulate API fetch - replace with actual API call
+        const timer = setTimeout(() => {
+            setData(recentOrders)
+            setIsLoading(false)
+        }, 1200)
+        return () => clearTimeout(timer)
+    }, [])
+
+    if (isLoading) return <RecentOrdersSkeleton />
+
     return (
         <Card className="col-span-1 md:col-span-2 shadow-sm border-none h-full flex flex-col">
             <CardHeader>
@@ -68,7 +85,7 @@ export function RecentOrders() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {recentOrders.map((order, i) => (
+                            {data.map((order, i) => (
                                 <TableRow key={i}>
                                     <TableCell className="font-medium">{order.customer}</TableCell>
                                     <TableCell>{order.product}</TableCell>
