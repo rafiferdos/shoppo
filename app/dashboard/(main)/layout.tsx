@@ -206,7 +206,7 @@ export default function DashboardMainLayout({
                         </DropdownMenu>
                     </div>
                 </header>
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
                     {children}
                 </main>
             </SidebarInset>

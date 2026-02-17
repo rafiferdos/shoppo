@@ -82,7 +82,7 @@ export function QuotationDetailsDialog({ open, onOpenChange, quotation, onAccept
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto overflow-x-hidden">
                 <DialogHeader>
                     <div className="flex justify-between items-start pr-8">
                         <div>
@@ -138,9 +138,9 @@ export function QuotationDetailsDialog({ open, onOpenChange, quotation, onAccept
                             </div>
                             <div className="space-y-1">
                                 <Label className="text-muted-foreground text-xs">Product Link</Label>
-                                <a href={quotation.product.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-500 hover:underline text-sm font-medium">
-                                    <HugeiconsIcon icon={Link01Icon} size={14} />
-                                    {quotation.product.link}
+                                <a href={quotation.product.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-500 hover:underline text-sm font-medium break-all">
+                                    <HugeiconsIcon icon={Link01Icon} size={14} className="shrink-0" />
+                                    <span className="truncate">{quotation.product.link}</span>
                                 </a>
                             </div>
                             <div className="space-y-1">
@@ -179,20 +179,20 @@ export function QuotationDetailsDialog({ open, onOpenChange, quotation, onAccept
                     </div>
                 </div>
 
-                <DialogFooter className="gap-2 sm:gap-0">
+                <DialogFooter className="flex-col sm:flex-row gap-2">
                     <Button
                         variant="destructive"
                         className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white font-medium"
                         onClick={() => onReject(quotation)}
                     >
-                        <HugeiconsIcon icon={Cancel01Icon} size={16} className="mr-2" />
+                        <HugeiconsIcon icon={Cancel01Icon} size={16} className="mr-1" />
                         Reject Request
                     </Button>
                     <Button
                         className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
                         onClick={() => onAccept(quotation, { international: internationalCharge, home: homeDeliveryCharge })}
                     >
-                        <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="mr-2" />
+                        <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="mr-1" />
                         Accept & Send for Payment
                     </Button>
                 </DialogFooter>
