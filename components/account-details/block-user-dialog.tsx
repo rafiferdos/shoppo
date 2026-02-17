@@ -37,7 +37,7 @@ export function BlockUserDialog({ open, onOpenChange, onConfirm }: BlockUserDial
                     </AlertDialogHeader>
                     <AlertDialogFooter className="w-full mt-2">
                         <AlertDialogAction
-                            className="w-full bg-primary font-bold h-12 rounded-lg shadow-none"
+                            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold h-12 text-sm rounded-lg shadow-none"
                             onClick={onConfirm}
                         >
                             CONFIRM →

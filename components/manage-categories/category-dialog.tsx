@@ -69,7 +69,7 @@ export function CategoryDialog({ open, onOpenChange, initialData, onSubmit }: Ca
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[500px]">
+            <DialogContent className="sm:max-w-125">
                 <DialogHeader>
                     <DialogTitle>{initialData ? "Edit Category" : "Add New Category"}</DialogTitle>
                     <DialogDescription>
@@ -91,7 +91,7 @@ export function CategoryDialog({ open, onOpenChange, initialData, onSubmit }: Ca
                         <Textarea
                             id="description"
                             placeholder="Enter category description"
-                            className="min-h-[100px]"
+                            className="min-h-25"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
@@ -117,7 +117,7 @@ export function CategoryDialog({ open, onOpenChange, initialData, onSubmit }: Ca
                             </Button>
                         </div>
                         {/* Link List */}
-                        <div className="space-y-2 mt-2 max-h-[150px] overflow-auto">
+                        <div className="space-y-2 mt-2 max-h-37.5 overflow-auto">
                             {links.map((link, index) => (
                                 <div key={index} className="flex gap-2 items-center">
                                     <Input
@@ -141,7 +141,7 @@ export function CategoryDialog({ open, onOpenChange, initialData, onSubmit }: Ca
                 </div>
                 <DialogFooter>
                     <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-                    <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700 text-white font-bold">
+                    <Button onClick={handleSubmit} className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold">
                         {initialData ? "Update Category" : "Add Category"}
                     </Button>
                 </DialogFooter>

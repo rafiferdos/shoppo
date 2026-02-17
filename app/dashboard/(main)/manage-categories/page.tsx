@@ -111,7 +111,7 @@ export default function ManageCategoriesPage() {
                     subtitle="Organize and manage product categories"
                 />
                 <Button
-                    className="bg-green-600 hover:bg-green-700 text-white font-medium gap-2 shadow-sm"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-2 shadow-sm"
                     onClick={handleAddCategory}
                 >
                     <HugeiconsIcon icon={Add01Icon} size={20} />

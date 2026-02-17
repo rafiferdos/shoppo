@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 export function CategorySkeleton() {
     return (
-        <Card className="h-[180px] p-6">
+        <Card className="h-45 p-6">
             <div className="flex justify-between items-start">
                 <Skeleton className="h-12 w-12 rounded-lg" />
                 <div className="flex gap-2">
