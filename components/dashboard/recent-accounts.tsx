@@ -146,7 +146,7 @@ export function RecentAccounts() {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                className="h-8 w-8 text-green-500 hover:text-green-600 hover:bg-green-50"
+                                                className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/5"
                                                 onClick={() => handleView(account)}
                                             >
                                                 <HugeiconsIcon icon={ViewIcon} size={18} />

@@ -65,7 +65,7 @@ export function StatsCards() {
                         </div>
                         <div className="mt-2 space-y-1">
                             <div className="text-2xl font-bold">{stat.value}</div>
-                            <div className="flex items-center text-xs text-green-500 font-medium">
+                            <div className="flex items-center text-xs text-primary font-medium">
                                 <HugeiconsIcon icon={ArrowUp01Icon} size={14} className="mr-1" />
                                 {stat.change}
                             </div>

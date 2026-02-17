@@ -95,7 +95,7 @@ export function RecentOrders() {
                                                 "rounded-sm px-2 py-0.5 text-xs font-normal shadow-none hover:bg-opacity-80",
                                                 order.status === "Shipped" && "bg-blue-100 text-blue-600 hover:bg-blue-100",
                                                 order.status === "Pending" && "bg-orange-100 text-orange-600 hover:bg-orange-100",
-                                                order.status === "Delivered" && "bg-green-100 text-green-600 hover:bg-green-100"
+                                                order.status === "Delivered" && "bg-primary/10 text-primary hover:bg-primary/20"
                                             )}
                                         >
                                             {order.status}

@@ -90,13 +90,14 @@ export function UserManagementChart() {
                         />
                         <Bar
                             dataKey="total"
-                            fill="#ebf6f0"
+                            fill="var(--color-primary)"
+                            fillOpacity={0.1}
                             radius={[4, 4, 0, 0]}
                             barSize={40}
                         />
                         <Bar
                             dataKey="users"
-                            fill="#5ea500"
+                            fill="var(--color-primary)"
                             radius={[4, 4, 0, 0]}
                             barSize={40}
                         />

@@ -131,7 +131,7 @@ export function NotificationsPopover() {
                                         <div className={cn(
                                             "mt-1 p-2 rounded-full shrink-0",
                                             notification.type === 'payment' && "bg-blue-100 text-blue-600",
-                                            notification.type === 'order' && "bg-green-100 text-green-600",
+                                            notification.type === 'order' && "bg-primary/10 text-primary",
                                             notification.type === 'system' && "bg-orange-100 text-orange-600",
                                         )}>
                                             {notification.type === 'payment' && <HugeiconsIcon icon={MoneyBag02Icon} size={16} />}
